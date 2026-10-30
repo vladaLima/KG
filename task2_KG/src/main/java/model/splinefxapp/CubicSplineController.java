@@ -32,7 +32,7 @@ public class CubicSplineController {
     // Расстояние между линиями сетки в математических координатах
     private static final double GRID_STEP = 1.0;
 
-    // Отступ для подписей
+    // Отступ для подписей в пикселях
     private static final double MARGIN = 35.0;
 
     // Максимальные координаты, в которых разрешено ставить точки
@@ -71,6 +71,7 @@ public class CubicSplineController {
                                     + ", y = "
                                     + formatCoordinate(pointsY.get(i))
                     );
+
                     return;
                 }
             }
@@ -130,7 +131,7 @@ public class CubicSplineController {
     }
 
     private double toMathY(double screenY) {
-        return (canvas.getHeight() / 2.0 - screenY) / getScale();
+        return (canvas.getHeight() / 2.0 - screenY) / getScale(); // Порядок вчитания другой, чтобы положит.знач Y соответствовали верхней части экрана
     }
 
     private void draw() {
@@ -157,7 +158,7 @@ public class CubicSplineController {
             }
         }
 
-        // Если точка лежит прямо на линии кривой, её синий крестик должен оставаться видимым поверх зелёной линии
+        // Если точка лежит прямо на линии кривой, её синий крестик должен оставаться видимым поверх линии
         drawPoints(gc);
     }
 
@@ -275,19 +276,10 @@ public class CubicSplineController {
         CubicSpline2D spline = new CubicSpline2D(x, y);
 
         // Накопление расстояний для t = [0, L]
-        double totalLength = 0.0;
-
-        for (int i = 1; i < x.length; i++) {
-            totalLength += Math.hypot(x[i] - x[i - 1], y[i] - y[i - 1]);
-        }
-
-        if (totalLength <= 0.0) {
-            return;
-        }
-
+        double totalLength = spline.getTotalLength();
         int samples = 500;
 
-        gc.setStroke(Color.GREEN);
+        gc.setStroke(Color.PURPLE);
         gc.setLineWidth(2.0);
 
         double[] previous = spline.point(0.0);

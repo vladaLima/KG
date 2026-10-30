@@ -35,6 +35,10 @@ public class CubicSpline2D {
         return new double[] {x, y}; // P(t) = [x(t), y(t)]
     }
 
+    public double getTotalLength() {
+        return params[params.length - 1];
+    }
+
     private double[] calculateParams(double[] x, double[] y) {
         double[] t = new double[x.length];
 
