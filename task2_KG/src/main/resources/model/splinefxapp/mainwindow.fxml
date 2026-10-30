@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="model.splinefxapp.CubicSplineController">
+
+    <center>
+        <AnchorPane fx:id="canvasPane">
+            <Canvas fx:id="canvas"
+                    AnchorPane.topAnchor="0.0"
+                    AnchorPane.bottomAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0"/>
+        </AnchorPane>
+    </center>
+
+    <bottom>
+        <Label fx:id="coordinatesLabel"
+               text="Координаты: наведите курсор на поле"
+               style="-fx-padding: 8; -fx-font-size: 13px;"/>
+    </bottom>
+
+</BorderPane>
